@@ -4,17 +4,29 @@ import pandas as pd
 import plotly.express as px
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 import re
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+DB_HOST = os.getenv("DB_HOST")
+DB_USER = os.getenv("DB_USER")
+DB_DATABASE = os.getenv("DB_DATABASE")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
 
 # XAMPP MySQL Configuration
 DB_CONFIG = {
-    "host": "localhost",
-    "user": "root",          # Default XAMPP username
-    "password": "",          # Default XAMPP password (empty)
-    "database": "research_db"
+    "host": os.getenv("DB_HOST"),
+    "user": os.getenv("DB_USER"),  
+    "database": os.getenv("DB_DATABASE"),
+    "password": os.getenv("DB_PASSWORD")
 }
 
 MODEL_NAME = "defog/sqlcoder-7b"
 SUMMARY_MODEL = "mistralai/Mistral-7B-Instruct-v0.1"
+
+# Define Schema Structure here
+# Important Note: Be descriptive in the naming of columns and tables
 SCHEMA = """
 Tables:
 - studies(id, title, author, year, citations, domain)

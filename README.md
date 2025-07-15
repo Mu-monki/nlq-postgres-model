@@ -1,1 +1,1 @@
-# nlq-postgres-model
+# Natural Language Query Model
